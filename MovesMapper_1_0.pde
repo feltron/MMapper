@@ -19,11 +19,13 @@ import java.util.Map;
 
 // General
 int canvasSize = 800; // 550 minimum value
+int tzOffset = -14400;
+String tzOffsetLabel = "-5:00";
 
 // Data
 String date, year, month, day;
 int[] movesDates;
-String accessToken = "<INSERT ACCESS TOKEN>";
+String accessToken = "G0G9KHS1n1Aw1zc06wh48mV0JpeY_t8wpUtUPBM4OhsCb1o0lVx9028k5lOx5bem";
 String apiCall;
 HashMap<String, Move> moves = new HashMap<String, Move>();
 
@@ -167,4 +169,3 @@ void draw() {
     }
   }
 }
-
