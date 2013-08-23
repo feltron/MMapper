@@ -19,6 +19,7 @@ class Move {
   String[] dateTime = new String[1];
   String[] PlaceDateTime = new String[1];
   int hours, mins, secs;
+  int time_offset;
 
   Move(String jsonDate_) {
     jsonDate = jsonDate_;
@@ -66,7 +67,8 @@ class Move {
               hours = floor(path_time[path_time.length-1]*0.0001);
               mins = floor((path_time[path_time.length-1] - hours*10000)*0.01);
               secs = path_time[path_time.length-1] - hours*10000 - mins*100;
-              path_time[path_time.length-1] = hours*3600 + mins*60 + secs;
+              time_offset = hours*3600 + mins*60 + secs + tzOffset;
+              path_time[path_time.length-1] = (time_offset > 0) ? time_offset : time_offset + 86400;
             }
           }
         }
@@ -94,8 +96,8 @@ class Move {
           hours = floor(place_time[place_time.length-1]*0.0001);
           mins = floor((place_time[place_time.length-1] - hours*10000)*0.01);
           secs = place_time[place_time.length-1] - hours*10000 - mins*100;
-          place_time[place_time.length-1] = hours*3600 + mins*60 + secs;
-
+          time_offset = hours*3600 + mins*60 + secs + tzOffset;
+          place_time[place_time.length-1] = (time_offset > 0) ? time_offset : time_offset + 86400;
         }
         catch (Exception e) {
           //          println("error "+e);
@@ -211,4 +213,3 @@ class Move {
     }
   }
 }
-
