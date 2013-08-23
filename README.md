@@ -27,7 +27,7 @@ Make sure that you are using Processing 2.0 and have installed the ControlP5 GUI
 `-F 'client_secret=<client_secret>' \` <br/>
 `-F 'grant_type=authorization_code' \` <br/>
 `-F 'redirect_uri=<redirect_uri>' \` <br/>
-`-F 'code=<code>' \https://api.moves-app.com/oauth/v1/access_token?`
+`-F 'code=<code_response>' \https://api.moves-app.com/oauth/v1/access_token?`
 	
 1. If everything is formed correctly and your request is made within 5 minutes of entering the PIN in the Moves app, the JSON response will contain your access token.
 1. Set the accessToken string on line 25.
