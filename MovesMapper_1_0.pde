@@ -1,4 +1,3 @@
-
 // - - - - - - - - - - - - - - - - - - - - - - - 
 // MOVES MAPPER v1.0
 // Nicholas Felton — August 23, 2013
@@ -19,7 +18,7 @@ import java.util.Map;
 // General
 int canvasSize = 800; // 550 minimum value
 int tzOffset = -14400;
-String tzOffsetLabel = "-5:00";
+String tzOffsetLabel = "-4:00";
 
 // Data
 String date, year, month, day;
