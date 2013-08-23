@@ -1,5 +1,4 @@
 
-
 // - - - - - - - - - - - - - - - - - - - - - - - 
 // MOVES MAPPER v1.0
 // Nicholas Felton — August 23, 2013
@@ -25,7 +24,7 @@ String tzOffsetLabel = "-5:00";
 // Data
 String date, year, month, day;
 int[] movesDates;
-String accessToken = "G0G9KHS1n1Aw1zc06wh48mV0JpeY_t8wpUtUPBM4OhsCb1o0lVx9028k5lOx5bem";
+String accessToken = "<access_token>";
 String apiCall;
 HashMap<String, Move> moves = new HashMap<String, Move>();
 
