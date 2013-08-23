@@ -25,7 +25,6 @@ int[] movesDates;
 String accessToken = "<INSERT ACCESS TOKEN>";
 String apiCall;
 HashMap<String, Move> moves = new HashMap<String, Move>();
-int timeOffset = -4;
 
 // Draw
 int placeSize = 6;

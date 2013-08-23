@@ -60,8 +60,6 @@ class Move {
               path_long = append(path_long, point.getFloat("lon"));
               path_lat = append(path_lat, point.getFloat("lat"));
               dateTime = split(point.getString("time"), 'T');
-              //              println(activity.getString("activity") + " / iterator:" + l + " / arraySize:" + path_time.length + " / PathSize:" + path.size());
-              //              println(point.getString("time"));
               dateTime = split(dateTime[1], 'Z');
               path_time = append(path_time, int(dateTime[0]));
               // convert path_time to minutes
@@ -94,14 +92,12 @@ class Move {
           PlaceDateTime = split(PlaceDateTime[1], 'Z');
 //          println(PlaceDateTime);
           place_time = append(place_time, int(PlaceDateTime[0]));
-//          println("before: " + place_time[place_time.length-1]);
           // convert path_time to minutes
           hours = floor(place_time[place_time.length-1]*0.0001);
           mins = floor((place_time[place_time.length-1] - hours*10000)*0.01);
           secs = place_time[place_time.length-1] - hours*10000 - mins*100;
           place_time[place_time.length-1] = hours*3600 + mins*60 + secs;
-//          println( hours + ":" + mins + ":" + secs);
-//          println("after: " + place_time[place_time.length-1]);
+
         }
         catch (Exception e) {
           //          println("error "+e);
