@@ -7,15 +7,15 @@
 // 4. Open Moves app. Go to Settings > Apps and select the "Enter PIN Code" option:
 // 5. After entering the PIN correctly and approving the access request, the browser will redirect to a URL like:
 //    http://YourRedirectURL.com/?code= <CodeResponse> &state=
-// 5. Request an access token by constructing the following request and pasting it into a terminal window:
+// 6. Request an access token by constructing the following request and pasting it into a terminal window:
 //    curl \-F 'client_id=<client_id>' \
 //    -F 'client_secret=<client_secret>' \
 //    -F 'grant_type=authorization_code' \
 //    -F 'redirect_uri=<redirect_uri>' \
 //    -F 'code=<code>' \https://api.moves-app.com/oauth/v1/access_token?
-// 6. If everything is formed correctly and your request is made within 5 minutes of entering the PIN in the Moves app, the JSON response will contain your access token.
-// 7. Set the accessToken string on line 25.
-// 8. Run the sketch.
+// 7. If everything is formed correctly and your request is made within 5 minutes of entering the PIN in the Moves app, the JSON response will contain your access token.
+// 8. Set the accessToken string on line 25.
+// 9. Run the sketch.
 
 
 // REQUIREMENTS
