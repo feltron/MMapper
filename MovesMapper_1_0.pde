@@ -12,6 +12,7 @@
 import controlP5.*;
 import java.util.Map;
 
+
 // - - - - - - - - - - - - - - - - - - - - - - - 
 // GLOBAL VARIABLES
 // - - - - - - - - - - - - - - - - - - - - - - - 
@@ -53,9 +54,6 @@ String[] monthDaysLeap = {
 };
 int TimeOfDay;
 String TimeString = "00:00:00";
-
-
-
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - 

@@ -75,8 +75,8 @@ class Move {
         }
         try {
           JSONObject place = segment.getJSONObject("place");
-//          println("Start Time: " + segment.getString("startTime"));
-//          println("* " + place.getString("name"));
+          //          println("Start Time: " + segment.getString("startTime"));
+          //          println("* " + place.getString("name"));
           //          println("* Type: " + place.getString("type"));
           //          println("* ID: " + place.getInt("id"));
           JSONObject location = place.getJSONObject("location");
@@ -88,9 +88,7 @@ class Move {
           place_lat = append(place_lat, location.getFloat("lat"));
           // compute place_time in minutes
           PlaceDateTime = split(segment.getString("startTime"), 'T');
-//          println(PlaceDateTime);
           PlaceDateTime = split(PlaceDateTime[1], 'Z');
-//          println(PlaceDateTime);
           place_time = append(place_time, int(PlaceDateTime[0]));
           // convert path_time to minutes
           hours = floor(place_time[place_time.length-1]*0.0001);
