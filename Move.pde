@@ -20,6 +20,9 @@ class Move {
   String[] PlaceDateTime = new String[1];
   int hours, mins, secs;
   int time_offset;
+  int date_offset;
+  String path_date;
+  String place_date;
 
   Move(String jsonDate_) {
     jsonDate = jsonDate_;
@@ -61,6 +64,8 @@ class Move {
               path_long = append(path_long, point.getFloat("lon"));
               path_lat = append(path_lat, point.getFloat("lat"));
               dateTime = split(point.getString("time"), 'T');
+              path_date = dateTime[0];
+              date_offset = ((int(path_date) - int(jsonDate)) < 0) ? -86400 : ((int(path_date) - int(jsonDate)) > 0) ? 86400 : 0;
               dateTime = split(dateTime[1], 'Z');
               path_time = append(path_time, int(dateTime[0]));
               // convert path_time to minutes
@@ -68,7 +73,7 @@ class Move {
               mins = floor((path_time[path_time.length-1] - hours*10000)*0.01);
               secs = path_time[path_time.length-1] - hours*10000 - mins*100;
               time_offset = hours*3600 + mins*60 + secs + tzOffset;
-              path_time[path_time.length-1] = (time_offset > 0) ? time_offset : time_offset + 86400;
+              path_time[path_time.length-1] = (time_offset > 0) ? time_offset : time_offset + date_offset;
             }
           }
         }
@@ -90,6 +95,8 @@ class Move {
           place_lat = append(place_lat, location.getFloat("lat"));
           // compute place_time in minutes
           PlaceDateTime = split(segment.getString("startTime"), 'T');
+          place_date = PlaceDateTime[0];
+          date_offset = ((int(place_date) - int(jsonDate)) < 0) ? -86400 : ((int(place_date) - int(jsonDate)) > 0) ? 86400 : 0;
           PlaceDateTime = split(PlaceDateTime[1], 'Z');
           place_time = append(place_time, int(PlaceDateTime[0]));
           // convert path_time to minutes
@@ -97,7 +104,7 @@ class Move {
           mins = floor((place_time[place_time.length-1] - hours*10000)*0.01);
           secs = place_time[place_time.length-1] - hours*10000 - mins*100;
           time_offset = hours*3600 + mins*60 + secs + tzOffset;
-          place_time[place_time.length-1] = (time_offset > 0) ? time_offset : time_offset + 86400;
+          place_time[place_time.length-1] = (time_offset > 0) ? time_offset : time_offset + date_offset;
         }
         catch (Exception e) {
           //          println("error "+e);
@@ -115,19 +122,19 @@ class Move {
     // Draw Paths
     noFill();
     for (int i=0; i<path_long.length; i++) {
-      if ( i>0 && path_type[i].equals("cyc") && cycle.booleanValue() && path_time[i] < TimeOfDay) {
+      if ( i>0 && path_type[i].equals("cyc") && cycle.booleanValue() && path_time[i] < TimeOfDay && path_time[i] > 0 ) {
         stroke(0, 255, 255, 100);
         line(loc_x[i], loc_y[i], loc_x[i-1], loc_y[i-1]);
       } 
-      else if ( i>0 && path_type[i].equals("run") && run.booleanValue() && path_time[i] < TimeOfDay) {
+      else if ( i>0 && path_type[i].equals("run") && run.booleanValue() && path_time[i] < TimeOfDay && path_time[i] > 0 ) {
         stroke(255, 0, 255, 100);
         line(loc_x[i], loc_y[i], loc_x[i-1], loc_y[i-1]);
       }
-      else if ( i>0 && path_type[i].equals("wlk") && walk.booleanValue() && path_time[i] < TimeOfDay) {
+      else if ( i>0 && path_type[i].equals("wlk") && walk.booleanValue() && path_time[i] < TimeOfDay && path_time[i] > 0 ) {
         stroke(255, 255, 0, 100);
         line(loc_x[i], loc_y[i], loc_x[i-1], loc_y[i-1]);
       }
-      else if ( i>0 && path_type[i].equals("trp") && transportation.booleanValue() && path_time[i] < TimeOfDay) {
+      else if ( i>0 && path_type[i].equals("trp") && transportation.booleanValue() && path_time[i] < TimeOfDay && path_time[i] > 0 ) {
         stroke(255, 40);
         line(loc_x[i], loc_y[i], loc_x[i-1], loc_y[i-1]);
       }
@@ -137,7 +144,7 @@ class Move {
     for (int i=0; i<place_long.length; i++) {
       if (placesDrawn.hasKey(place_name[i])) {
       } 
-      else if ( labels.booleanValue() && place_time[i] < TimeOfDay ) {
+      else if ( labels.booleanValue() && place_time[i] < TimeOfDay && place_time[i] > 0 ) {
         place_loc_x = map(place_long[i], min_long, max_long, margin, canvasSize-margin);
         place_loc_y = map(place_lat[i], max_lat, min_lat, 80, canvasSize-margin);
         fill(255);

@@ -17,13 +17,10 @@ import java.util.Map;
 
 // General
 int canvasSize = 800; // 550 minimum value
-int tzOffset = -14400;
-String tzOffsetLabel = "-4:00";
 
 // Data
 String date, year, month, day;
 int[] movesDates;
-String accessToken = "<access_token>";
 String apiCall;
 HashMap<String, Move> moves = new HashMap<String, Move>();
 
