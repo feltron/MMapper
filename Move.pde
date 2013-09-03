@@ -95,7 +95,6 @@ class Move {
           mins = floor((place_time[place_time.length-1] - hours*10000)*0.01);
           secs = place_time[place_time.length-1] - hours*10000 - mins*100;
           place_time[place_time.length-1] = hours*3600 + mins*60 + secs;
-
         }
         catch (Exception e) {
           //          println("error "+e);
@@ -195,8 +194,18 @@ class Move {
 
 
   void jsonFetch(String fetchDate) {
+    String thisYear = str(year());
+    String thisMonth = str(month());
+    String thisDay = str(day());
+    if (int(thisMonth) <= 9) {
+      thisMonth = "0" + thisMonth;
+    }
+    if (int(thisDay) <= 9) {
+      thisDay = "0" + thisDay;
+    }
+    String thisDate = thisYear + thisMonth + thisDay;
     File f = new File(dataPath( fetchDate + ".json" ));
-    if ( !f.exists() ) { // Call API if data doesn't exist
+    if ( !f.exists() || fetchDate.equals(thisDate) ) { // Call API if data doesn't exist
       try {
         println("Querying… " + fetchDate);
         apiCall = "https://api.moves-app.com/api/v1/user/storyline/daily/" + fetchDate + "?trackPoints=true&access_token=" + accessToken;
