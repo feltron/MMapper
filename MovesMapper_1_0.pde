@@ -2,7 +2,7 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - 
 // MOVES MAPPER v1.0
-// Nicholas Felton — August 23, 2013
+// Nicholas Felton — September 3, 2013
 // - - - - - - - - - - - - - - - - - - - - - - - 
 
 
@@ -23,7 +23,7 @@ int canvasSize = 800; // 550 minimum value
 // Data
 String date, year, month, day;
 int[] movesDates;
-String accessToken = "<INSERT ACCESS TOKEN>";
+String accessToken = "Q4qQMxmlO8L1gfb7mwAV3srP_E22CbgQW2tJ86MwfQ4e3qLv4i6a06p72kSHBSY9";
 String apiCall;
 HashMap<String, Move> moves = new HashMap<String, Move>();
 

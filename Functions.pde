@@ -135,13 +135,13 @@ void listDates() {
   movesDates = new int[0];
   for (int i=0; i<checkbox.getArrayValue().length; i++) {
     if (checkbox.getArrayValue(i) != 0) {
-      if (d1.getValue() < 9) {
+      if (d1.getValue() <= 9) {
         month = "0" + str(int(d1.getValue()));
       } 
       else {
         month = str(int(d1.getValue()));
       }
-      if (i < 9) {
+      if (i <= 9) {
         day = "0" + str(i+1);
       } 
       else {
@@ -177,7 +177,8 @@ void makeMoves() {
 }
 
 
-
+// Format Minutes into Hour:Minute:Second Format for Time Scrubber 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 void timeLabel() {
   String TimeOfDay_hour = str(floor(TimeOfDay/3600));
   String TimeOfDay_min = str(floor((TimeOfDay-int(TimeOfDay_hour)*3600)/60));
