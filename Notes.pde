@@ -1,21 +1,11 @@
 
 // SETUP
-// 1. Register an API client at: https://dev.moves-app.com
-// 2. Get ClientID and ClientSecret
-// 3. Request all access from the API:
-//    https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id= <insert ClientID> &scope=activity+location
-// 4. Open Moves app. Go to Settings > Apps and select the "Enter PIN Code" option:
-// 5. After entering the PIN correctly and approving the access request, the browser will redirect to a URL like:
-//    http://YourRedirectURL.com/?code= <CodeResponse> &state=
-// 6. Request an access token by constructing the following request and pasting it into a terminal window:
-//    curl \-F 'client_id=<client_id>' \
-//    -F 'client_secret=<client_secret>' \
-//    -F 'grant_type=authorization_code' \
-//    -F 'redirect_uri=<redirect_uri>' \
-//    -F 'code=<code>' \https://api.moves-app.com/oauth/v1/access_token?
-// 7. If everything is formed correctly and your request is made within 5 minutes of entering the PIN in the Moves app, the JSON response will contain your access token.
-// 8. Set the accessToken string on line 25.
-// 9. Run the sketch.
+// 1. Open Moves app and make sure that your activity is up to date.
+// 2. In the settings, go to the Apps section and click the add a PIN button.
+// 3. Visit http://shielded-sierra-8807.herokuapp.com to get the PIN and enter this in the app.
+// 4. Once you've given the app permission to access your data, the web page will refresh and dislay your access token.
+// 5. Set the accessToken string on line 25 in the Processing sketch.
+// 6. Run the sketch.
 
 
 // REQUIREMENTS
@@ -51,11 +41,11 @@
 // switch slider to minutes
 // GUI: Start in ON state
 // only show places after correct time
+// implement time zone support (merged from https://github.com/yonoleo/MMapper)
 
 
 // HIGH PRI
 // preserve aspect ratio of map
-// implement time zone offset
 
 
 // MID PRI

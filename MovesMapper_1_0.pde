@@ -1,5 +1,3 @@
-
-
 // - - - - - - - - - - - - - - - - - - - - - - - 
 // MOVES MAPPER v1.0
 // Nicholas Felton — September 3, 2013
@@ -23,7 +21,6 @@ int canvasSize = 800; // 550 minimum value
 // Data
 String date, year, month, day;
 int[] movesDates;
-String accessToken = "<INSERT ACCESS TOKEN>";
 String apiCall;
 HashMap<String, Move> moves = new HashMap<String, Move>();
 
@@ -167,4 +164,3 @@ void draw() {
     }
   }
 }
-

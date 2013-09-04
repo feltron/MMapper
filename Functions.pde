@@ -193,11 +193,10 @@ void timeLabel() {
   }
 
 //  println(TimeOfDay_hour + ":" + TimeOfDay_min + ":" + TimeOfDay_sec);
-  TimeString = TimeOfDay_hour + ":" + TimeOfDay_min + ":" + TimeOfDay_sec + " UTC";
+  TimeString = TimeOfDay_hour + ":" + TimeOfDay_min + ":" + TimeOfDay_sec + " UTC" + " " + tzOffsetLabel;
 
   cp5.getController("TimeOfDay").getValueLabel().setText(TimeString);
 }
-
 
 
 
