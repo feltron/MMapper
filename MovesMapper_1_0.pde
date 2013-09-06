@@ -1,6 +1,7 @@
+
 // - - - - - - - - - - - - - - - - - - - - - - - 
-// MOVES MAPPER v1.0
-// Nicholas Felton — September 3, 2013
+// MOVES MAPPER v1.1
+// Nicholas Felton — September 4, 2013
 // - - - - - - - - - - - - - - - - - - - - - - - 
 
 
@@ -9,48 +10,6 @@
 // - - - - - - - - - - - - - - - - - - - - - - - 
 import controlP5.*;
 import java.util.Map;
-
-
-// - - - - - - - - - - - - - - - - - - - - - - - 
-// GLOBAL VARIABLES
-// - - - - - - - - - - - - - - - - - - - - - - - 
-
-// General
-int canvasSize = 800; // 550 minimum value
-
-// Data
-String date, year, month, day;
-int[] movesDates;
-String apiCall;
-HashMap<String, Move> moves = new HashMap<String, Move>();
-
-// Draw
-int placeSize = 6;
-FloatDict max_lats = new FloatDict();
-FloatDict min_lats = new FloatDict();
-FloatDict max_longs = new FloatDict();
-FloatDict min_longs = new FloatDict();
-float max_lat, min_lat, max_long, min_long;
-float mapOffset;
-StringDict placesDrawn = new StringDict();
-int margin = 30;
-
-// GUI
-ControlP5 cp5;
-DropdownList d1, d2;
-CheckBox checkbox;
-Button labels, walk, run, cycle, transportation;
-String[] monthNames = {
-  "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-};
-String[] monthDaysStandard = {
-  "31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"
-};
-String[] monthDaysLeap = {
-  "31", "29", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"
-};
-int TimeOfDay;
-String TimeString = "00:00:00";
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - 
@@ -66,8 +25,10 @@ void setup() {
   GUIcheckbox("checkbox", 150, height-135);
   GUIdropdownD1("d1-month", 20, height-95, "MONTH");
   GUIdropdownD2("d2-year", 20, height-120, "YEAR");
+  GUIdropdownD3("d3-timezone", width-120, 45, "TIMEZONE");
 
   // Populate Date GUI
+  GUItimezone();
   GUImonth(year(), month(), month());
   GUIyear(year());
   GUIday(year(), month(), day());
@@ -82,7 +43,7 @@ void setup() {
               .setColorActive(color(255, 128))
                 .setSwitch(true)
                   .setOn()
-                  ;
+                    ;
 
   walk = cp5.addButton("walk")
     .setPosition(width-120, height-110)
@@ -93,7 +54,7 @@ void setup() {
               .setColorActive(color(255, 128))
                 .setSwitch(true)
                   .setOn()
-                  ;
+                    ;
 
   run = cp5.addButton("run")
     .setPosition(width-120, height-85)
@@ -104,7 +65,7 @@ void setup() {
               .setColorActive(color(255, 128))
                 .setSwitch(true)
                   .setOn()
-                  ;
+                    ;
 
   cycle = cp5.addButton("cycle")
     .setPosition(width-120, height-60)
@@ -115,7 +76,7 @@ void setup() {
               .setColorActive(color(255, 128))
                 .setSwitch(true)
                   .setOn()
-                  ;
+                    ;
 
   transportation = cp5.addButton("transportation")
     .setPosition(width-120, height-35)
@@ -126,12 +87,12 @@ void setup() {
               .setColorActive(color(255, 128))
                 .setSwitch(true)
                   .setOn()
-                  ;
+                    ;
 
-  // add a vertical slider
+  // add a horizontal slider
   cp5.addSlider("TimeOfDay")
     .setPosition(margin, margin)
-      .setSize(width-(2*margin), 10)
+      .setSize(width-(2*margin)-110, 10)
         .setRange(0, 86400)
           .setValue(86400)
             .setColorForeground(color(190))
@@ -142,7 +103,9 @@ void setup() {
   // reposition the Label for controller 'slider'
   cp5.getController("TimeOfDay").getValueLabel().setText(TimeString).align(ControlP5.LEFT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);
   cp5.getController("TimeOfDay").getCaptionLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);
+  d3.setLabel("Time Zone");
 }
+
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - 
@@ -156,7 +119,7 @@ void draw() {
   timeLabel();
 
   // Draw Moves
-  for (int i=0; i<movesDates.length; i++) {      
+  for (int i=0; i<movesDates.length; i++) {
     try {
       moves.get(str(movesDates[i])).display();
     }
@@ -164,3 +127,4 @@ void draw() {
     }
   }
 }
+

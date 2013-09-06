@@ -1,4 +1,8 @@
 
+// - - - - - - - - - - - - - - - - - - - - - - - 
+// GUI FUNCTIONS
+// - - - - - - - - - - - - - - - - - - - - - - - 
+
 // Initialize Empty Checkbox GUI 
 // - - - - - - - - - - - - - - - - - - - - - - - 
 void GUIcheckbox(String name_, int xpos_, int ypos_) {
@@ -14,6 +18,7 @@ void GUIcheckbox(String name_, int xpos_, int ypos_) {
                     .setSpacingRow(10)
                       ;
 }
+
 
 // Initialize Empty Months Dropdown GUI
 // - - - - - - - - - - - - - - - - - - - - - - - 
@@ -47,6 +52,23 @@ void GUIdropdownD2(String name_, int xpos_, int ypos_, String label_) {
 }
 
 
+// Initialize Empty Time Zone Dropdown GUI 
+// - - - - - - - - - - - - - - - - - - - - - - - 
+void GUIdropdownD3(String name_, int xpos_, int ypos_, String label_) {
+  d3 = cp5.addDropdownList(name_)
+    .setPosition(xpos_, ypos_)
+      .setItemHeight(20)
+        .setBarHeight(15)
+          .setColorBackground(color(60))
+            .setColorActive(color(255, 128))
+              .setHeight(300)
+                ;
+  d3.captionLabel().set(label_)
+    .style().marginTop = 3;
+  d3.valueLabel().style().marginTop = 3;
+}
+
+
 // Populate Months Dropdown 
 // - - - - - - - - - - - - - - - - - - - - - - - 
 void GUImonth(int year_, int month_, int monthSet) {
@@ -75,7 +97,17 @@ void GUIyear(int year_) {
 }
 
 
-// Populate Days Dropdown 
+// Populate Time Zone Dropdown 
+// - - - - - - - - - - - - - - - - - - - - - - - 
+void GUItimezone() {
+  for (int i=0; i<=timeZoneOffsets.length-1; i++) {
+    d3.addItem(timeZoneOffsets[i] + " : " + timeZoneOffsetNames[i], i);
+  }
+  d3.setValue(timeZoneOffsetIndex);
+}
+
+
+// Populate Days Checkboxes 
 // - - - - - - - - - - - - - - - - - - - - - - - 
 void GUIday(int year_, int month_, int day_) {
   if (month_ == month() && year_ == year()) {
@@ -126,12 +158,20 @@ void controlEvent(ControlEvent theEvent) {
     GUIcheckbox("checkbox", 150, height-135);
     GUIday(int(d2.getValue()), int(d1.getValue()), 1);
   }
+  else if (theEvent.isFrom("d3-timezone")) {
+    println("index: " + d3.getValue());
+    tzOffset = int(timeZoneOffsets[int(d3.getValue())])*3600;
+    println("offset: " + tzOffset);
+    moves.clear();
+    checkbox.deactivateAll();
+  }
 }
 
 
 // Format Events into Array of Dates 
 // - - - - - - - - - - - - - - - - - - - - - - - 
 void listDates() {
+  String date, year, month, day;
   movesDates = new int[0];
   for (int i=0; i<checkbox.getArrayValue().length; i++) {
     if (checkbox.getArrayValue(i) != 0) {
@@ -141,7 +181,7 @@ void listDates() {
       else {
         month = str(int(d1.getValue()));
       }
-      if (i < 9) {
+      if (i+1 <= 9) {
         day = "0" + str(i+1);
       } 
       else {
@@ -157,46 +197,22 @@ void listDates() {
 }
 
 
-// Add Elements as necessary to Moves hashmap
-// elements in hashmap that shouldn't be shown won't be called in display function
-// - - - - - - - - - - - - - - - - - - - - - - - 
-void makeMoves() {
-  for (int i=0; i<movesDates.length; i++) {
-    if ( moves.containsKey(str(movesDates[i])) ) {
-      //            println("Object key found: " + (movesDates[i]) +  " do nothing");
-    } 
-    else {
-      //            println("Object key not found: " + (movesDates[i]) +  " add to hashmap");
-      moves.put( str(movesDates[i]), new Move(str(movesDates[i])) );
-    }
-  }
-
-  for (String k : moves.keySet()) {
-    moves.get(k).mapPaths();
-  }
-}
-
-
 // Format Minutes into Hour:Minute:Second Format for Time Scrubber 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 void timeLabel() {
   String TimeOfDay_hour = str(floor(TimeOfDay/3600));
   String TimeOfDay_min = str(floor((TimeOfDay-int(TimeOfDay_hour)*3600)/60));
   String TimeOfDay_sec = str(TimeOfDay-int(TimeOfDay_hour)*3600-int(TimeOfDay_min)*60);
-
   if (TimeOfDay_hour.length() == 1) {
     TimeOfDay_hour = "0" + TimeOfDay_hour;
-  } else if (TimeOfDay_min.length() == 1) {
+  } 
+  else if (TimeOfDay_min.length() == 1) {
     TimeOfDay_min = "0" + TimeOfDay_min;
-  } else if (TimeOfDay_sec.length() == 1) {
+  } 
+  else if (TimeOfDay_sec.length() == 1) {
     TimeOfDay_sec = "0" + TimeOfDay_sec;
   }
-
-//  println(TimeOfDay_hour + ":" + TimeOfDay_min + ":" + TimeOfDay_sec);
-  TimeString = TimeOfDay_hour + ":" + TimeOfDay_min + ":" + TimeOfDay_sec + " UTC" + " " + tzOffsetLabel;
-
+  TimeString = TimeOfDay_hour + ":" + TimeOfDay_min + ":" + TimeOfDay_sec + " (" + timeZoneOffsetNames[int(d3.getValue())] + ")";
   cp5.getController("TimeOfDay").getValueLabel().setText(TimeString);
 }
-
-
 

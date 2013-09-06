@@ -1,4 +1,8 @@
 
+// - - - - - - - - - - - - - - - - - - - - - - - 
+// NOTES
+// - - - - - - - - - - - - - - - - - - - - - - - 
+
 // SETUP
 // 1. Open Moves app and make sure that your activity is up to date.
 // 2. In the settings, go to the Apps section and click the add a PIN button.
@@ -42,6 +46,8 @@
 // GUI: Start in ON state
 // only show places after correct time
 // implement time zone support (merged from https://github.com/yonoleo/MMapper)
+// Requery the current day on launch
+// Add GUI for timezone selection
 
 
 // HIGH PRI
@@ -51,7 +57,6 @@
 // MID PRI
 // steps / miles / etc display
 // move labeling map function out of draw loop
-// Requery the current day on launch?
 // GUI: location blobs
 // GUI: PDF export
 // GUI: All On / All Off
