@@ -141,7 +141,7 @@ void listDates() {
       else {
         month = str(int(d1.getValue()));
       }
-      if (i <= 9) {
+      if (i < 9) {
         day = "0" + str(i+1);
       } 
       else {

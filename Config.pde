@@ -3,9 +3,8 @@
 // - - - - - - - - - - - - - - - - - - - - - - - 
 
 // Data
-String accessToken = "<access_token>";
+String accessToken = "<INSERT ACCESS TOKEN>";
 
 // Time Zone
 String tzOffsetLabel = "-4:00";
-// tzOffset = Hours * 3600
 int tzOffset = -14400;
