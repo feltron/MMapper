@@ -111,10 +111,10 @@ class Move {
         }
       }
     }
-    max_lats.set(jsonDate, max(path_lat));
-    min_lats.set(jsonDate, min(path_lat));
-    max_longs.set(jsonDate, max(path_long));
-    min_longs.set(jsonDate, min(path_long));
+    max_lats.set(jsonDate, (path_lat.length > 0) ? max(path_lat) : max(place_lat));
+    min_lats.set(jsonDate, (path_lat.length > 0) ? min(path_lat) : min(place_lat));
+    max_longs.set(jsonDate, (path_long.length > 0) ? max(path_long) : max(place_long));
+    min_longs.set(jsonDate, (path_long.length > 0) ? min(path_long) : min(place_long));
   }
 
 
