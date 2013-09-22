@@ -34,6 +34,7 @@ float max_lat, min_lat, max_long, min_long;
 float mapOffset;
 StringDict placesDrawn = new StringDict();
 int margin = 30;
+int top_margin = margin + 50;
 
 // GUI
 ControlP5 cp5;
