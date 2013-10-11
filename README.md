@@ -15,7 +15,7 @@ Make sure that you are using Processing 2.0 and have installed the ControlP5 GUI
 1. In the settings, go to the Apps section and click the add a PIN button.
 1. Visit http://shielded-sierra-8807.herokuapp.com to get the PIN and enter this in the app.
 1. Once you've given the app permission to access your data, the web page will refresh and display your access token.
-1. Set the accessToken string on line 25 in the Processing sketch.
+1. Set the accessToken string in config.pde.
 1. Run the sketch.
 
 
