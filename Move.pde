@@ -112,12 +112,41 @@ class Move {
         }
       }
     }
-    max_lats.set(jsonDate, (path_lat.length > 0) ? max(path_lat) : max(place_lat));
-    min_lats.set(jsonDate, (path_lat.length > 0) ? min(path_lat) : min(place_lat));
-    max_longs.set(jsonDate, (path_long.length > 0) ? max(path_long) : max(place_long));
-    min_longs.set(jsonDate, (path_long.length > 0) ? min(path_long) : min(place_long));
-  }
+    
+    float min_path_lat = 90;
+    float min_path_long = 180;
 
+    float min_place_lat = 90;
+    float min_place_long = 180;
+
+    float max_path_lat = -90;
+    float max_path_long = -180;
+    
+    float max_place_lat = -90;
+    float max_place_long = -180;
+    
+    if (path_lat.length > 0 && path_long.length > 0) {
+      min_path_lat = min(path_lat);
+      max_path_lat = max(path_lat);
+      
+      min_path_long = min(path_long);
+      max_path_long = max(path_long);
+    }
+    
+    if (place_lat.length > 0 && place_long.length > 0) {
+      min_place_lat = min(place_lat);
+      max_place_lat = max(place_lat);
+      
+      min_place_long = min(place_long);
+      max_place_long = max(place_long);
+    }
+
+    min_lats.set(jsonDate, min(min_path_lat, min_place_lat));
+    max_lats.set(jsonDate, max(max_path_lat, max_place_lat));
+    
+    min_longs.set(jsonDate, min(min_path_long, min_place_long));
+    max_longs.set(jsonDate, max(max_path_long, max_place_long));
+  }
 
   void display() {
     // Draw Paths
