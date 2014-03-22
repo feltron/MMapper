@@ -1,3 +1,4 @@
 # Ignore unneeded files.
 .DS_Store
 data/
+pdfs/

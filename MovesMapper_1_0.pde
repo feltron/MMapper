@@ -1,3 +1,4 @@
+
 // - - - - - - - - - - - - - - - - - - - - - - - 
 // MOVES MAPPER v1.0
 // Nicholas Felton — September 3, 2013
@@ -9,7 +10,7 @@
 // - - - - - - - - - - - - - - - - - - - - - - - 
 import controlP5.*;
 import java.util.Map;
-
+import processing.pdf.*;
 
 // - - - - - - - - - - - - - - - - - - - - - - - 
 // GLOBAL VARIABLES
@@ -36,11 +37,16 @@ StringDict placesDrawn = new StringDict();
 int margin = 30;
 int top_margin = margin + 50;
 
+// for PDF export
+Boolean record = false;
+
 // GUI
 ControlP5 cp5;
 DropdownList d1, d2;
 CheckBox checkbox;
-Button labels, walk, run, cycle, transportation;
+Button labels, walk, run, cycle, transportation, exportPDF;
+Textfield input;
+
 String[] monthNames = {
   "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 };
@@ -143,6 +149,22 @@ void setup() {
   // reposition the Label for controller 'slider'
   cp5.getController("TimeOfDay").getValueLabel().setText(TimeString).align(ControlP5.LEFT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);
   cp5.getController("TimeOfDay").getCaptionLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);
+
+  // PDF export
+  exportPDF = cp5.addButton("exportPDF", 0, width-250, height-40, 75, 20)
+      .setColorForeground(color(190))
+        .setColorBackground(color(60))
+          .setColorActive(color(255, 128));
+          
+  input = cp5.addTextfield("")
+    .setValue("filename.pdf")
+      .setPosition(width-250, height-70)
+        .setSize(100, 20)
+          .setColorForeground(color(190))
+            .setColorBackground(color(60))
+              .setColorActive(color(255, 128))
+                .setFocus(true);
+
 }
 
 
@@ -156,6 +178,10 @@ void draw() {
   placesDrawn.clear();
   timeLabel();
 
+  if(record) {
+    beginRecord(PDF, "pdfs/"+input.getText());
+  }
+
   // Draw Moves
   for (int i=0; i<movesDates.length; i++) {      
     try {
@@ -164,4 +190,20 @@ void draw() {
     catch (Exception e) {
     }
   }
+  
+  if(record) {
+    record = false;
+    println("Saving PDF file to pdfs/"+input.getText()+"...");
+    endRecord();
+  }
 }
+ 
+
+// - - - - - - - - - - - - - - - - - - - - - - - 
+// PDF EXPORT
+// - - - - - - - - - - - - - - - - - - - - - - - 
+
+public void exportPDF() {
+ record = true;
+}
+
