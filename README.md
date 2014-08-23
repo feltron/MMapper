@@ -7,7 +7,7 @@ A processing sketch for rendering location and activity data from the Moves iPho
 ## Requirements
 Make sure that you are using Processing 2.0 and have installed the ControlP5 GUI 2.0 library for this sketch to run properly.
 * Processing 2.0 `https://processing.org/download/`
-* ControlP5 2.0 `Library http://www.sojamo.de/libraries/controlP5/`
+* ControlP5 2.0 Library `http://www.sojamo.de/libraries/controlP5/`
 
 
 ## Setup
