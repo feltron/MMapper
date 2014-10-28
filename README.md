@@ -1,7 +1,7 @@
 MovesMapper
 ===========
 
-A processing sketch for rendering location and activity data from the Moves iPhone app.
+A processing sketch for rendering location and activity data from the Moves iPhone or Android app.
 
 
 ## Requirements
