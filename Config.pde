@@ -3,7 +3,7 @@
 // - - - - - - - - - - - - - - - - - - - - - - - 
 
 // Data
-String accessToken = "<INSERT ACCESS TOKEN>";
+String accessToken = "<JlhyEjcyE0I36yNA8gq4Dmt294qdLmV9g740ueLA0h2slO9A13PS9KM3WtdLVbjq>";
 
 // Time Zone
 String tzOffsetLabel = "-4:00";
